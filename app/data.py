@@ -5,6 +5,7 @@ from typing import Optional
 
 DATA_PATH = Path(__file__).parent.parent / "data" / "recipes.json"
 
+
 def _load():
     if not DATA_PATH.exists():
         raise FileNotFoundError(
@@ -13,6 +14,7 @@ def _load():
         )
     with open(DATA_PATH, encoding="utf-8") as f:
         return json.load(f)
+
 
 RECIPES: list[dict] = _load()
 
@@ -46,7 +48,7 @@ def search(query: str, limit: int = 24) -> list[dict]:
 
 
 def get_stats() -> dict:
-    return { 
+    return {
         "total": len(RECIPES),
         "avg_ingredients": round(
             sum(r["num_ingredients"] for r in RECIPES) / len(RECIPES), 1
